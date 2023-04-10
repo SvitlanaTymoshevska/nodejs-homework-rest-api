@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { auth, validation, ctrlWrapper } = require("../../middelwares");
+const { auth, validation, ctrlWrapper, upload } = require("../../middelwares");
 const { users: ctrl } = require("../../controllers");
 const {
   RegisterJoiSchema,
@@ -25,6 +25,13 @@ router.patch(
   auth,
   validation(SubscriptionJoiSchema),
   ctrlWrapper(ctrl.updateUser)
+);
+
+router.patch(
+  "/avatars",
+  auth,
+  upload.single("avatar"),
+  ctrlWrapper(ctrl.updateAvatar)
 );
 
 router.post("/logout", auth, ctrlWrapper(ctrl.logout));
