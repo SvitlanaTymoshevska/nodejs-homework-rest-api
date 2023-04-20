@@ -4,6 +4,7 @@ const { auth, validation, ctrlWrapper, upload } = require("../../middelwares");
 const { users: ctrl } = require("../../controllers");
 const {
   RegisterJoiSchema,
+  EmailJoiSchema,
   LoginJoiSchema,
   SubscriptionJoiSchema,
 } = require("../../models/user");
@@ -14,6 +15,14 @@ router.post(
   "/register",
   validation(RegisterJoiSchema),
   ctrlWrapper(ctrl.register)
+);
+
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+
+router.post(
+  "/verify",
+  validation(EmailJoiSchema),
+  ctrlWrapper(ctrl.resendVerifyEmail)
 );
 
 router.post("/login", validation(LoginJoiSchema), ctrlWrapper(ctrl.login));

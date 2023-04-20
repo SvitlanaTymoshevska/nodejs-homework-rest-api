@@ -7,7 +7,7 @@ const updateUser = async (req, res) => {
     "subscription"
   );
   if (!hasPropertySubscription) {
-    throw createError(400, "missing field subscription");
+    throw createError(400, "Missing field subscription");
   }
 
   const { _id } = req.user;

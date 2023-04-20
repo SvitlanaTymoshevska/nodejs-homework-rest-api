@@ -16,7 +16,7 @@ const updateAvatar = async (req, res, next) => {
     const avatar = await Jimp.read(tempUpload);
 
     if (!avatar) {
-      throw createError(400, "download error");
+      throw createError(400, "Download error");
     }
     avatar.autocrop().resize(250, 250, Jimp.RESIZE_BEZIER).write(resultUpload);
     await fs.unlink(tempUpload);
